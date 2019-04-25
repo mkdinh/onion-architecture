@@ -1,6 +1,6 @@
-import { User } from './User';
+import { User } from "./models/User";
 
 export interface IUserService {
   getUsers(): User[];
-  getUserById(identifier: number): User;
+  getUserById(id: number): User;
 }

@@ -1,2 +1,3 @@
-export * from './UserService';
-export * from './IRepository';
+export * from "./UserService";
+export * from "./BookService";
+export * from "./IRepository";

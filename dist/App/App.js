@@ -2,11 +2,16 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var enums_1 = require("./enums");
 var App = /** @class */ (function () {
-    function App(userService, logger) {
+    function App(userService, bookService, logger) {
         this._userService = userService;
+        this._bookService = bookService;
         this._logger = logger;
     }
     App.prototype.main = function () {
+        this.logUsers();
+        this.logBooks();
+    };
+    App.prototype.logUsers = function () {
         var _this = this;
         var users = this._userService.getUsers();
         users.forEach(function (u) {
@@ -23,6 +28,26 @@ var App = /** @class */ (function () {
                     break;
                 default:
                     _this._logger.info(u.name + " has no valid status.");
+            }
+        });
+    };
+    App.prototype.logBooks = function () {
+        var _this = this;
+        var books = this._bookService.getBooks();
+        books.forEach(function (b) {
+            var bookInfo = b.id + ". " + b.title + " (" + b.condition + ")";
+            switch (b.condition) {
+                case enums_1.Condition.New:
+                    _this._logger.info(bookInfo);
+                    break;
+                case enums_1.Condition.Old:
+                    _this._logger.warn(bookInfo);
+                    break;
+                case enums_1.Condition.Ancient:
+                    _this._logger.error(bookInfo);
+                    break;
+                default:
+                    _this._logger.info(b.title + " has no valid status.");
             }
         });
     };

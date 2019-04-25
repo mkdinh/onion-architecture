@@ -1,6 +1,6 @@
-import { IDbContext } from '../Data/IDbContext';
-import { IRepository } from '../Services/IRepository';
-import { User } from '../App/User';
+import { IDbContext } from "../Data/IDbContext";
+import { IRepository } from "../Services/IRepository";
+import { User } from "../App/models/User";
 
 export class UserRepository implements IRepository<User> {
   private _dbContext: IDbContext;
@@ -9,20 +9,25 @@ export class UserRepository implements IRepository<User> {
     this._dbContext = dbContext;
   }
 
-  all() {
-    return this._dbContext.findAll();
+  all(): User[] {
+    return this._dbContext.get<User>().findAll();
   }
 
-  where(predicate: (u: User) => boolean): User {
-    return this._dbContext.find(predicate);
+  where(predicate: (u: User) => boolean): User[] {
+    return this._dbContext.get<User>().find(predicate);
   }
+
+  singleOrDefault(predicate: (u: User) => boolean): User {
+    return this._dbContext.get<User>().find(predicate)[0];
+  }
+
   add(user: User): User {
-    const userModel = this._dbContext.create(user);
-    return userModel;
+    const newUser = this._dbContext.get<User>().create(user);
+    return newUser;
   }
 
-  remove(id: number): boolean {
-    this._dbContext.delete(id);
+  remove(user: User): boolean {
+    this._dbContext.get<User>().delete(user);
     return true;
   }
 }

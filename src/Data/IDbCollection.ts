@@ -1,6 +1,7 @@
 export interface IDbCollection<T> {
+  domainTypeName: string;
   findAll(): T[];
-  find(predicate: (x: T) => boolean): T[];
-  create(data: T): T;
-  delete(id: number): boolean;
+  find(predicate: (entity: T) => boolean): T[];
+  create(entity: T): T;
+  delete(entity: T): boolean;
 }

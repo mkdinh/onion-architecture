@@ -9,7 +9,7 @@ var UserService = /** @class */ (function () {
         return this._userRepo.all();
     };
     UserService.prototype.getUserById = function (id) {
-        return this._userRepo.where(function (u) { return u.id === id; });
+        return this._userRepo.singleOrDefault(function (u) { return u.id === id; });
     };
     UserService.prototype.addUser = function (user) {
         try {

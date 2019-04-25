@@ -5,17 +5,20 @@ var UserRepository = /** @class */ (function () {
         this._dbContext = dbContext;
     }
     UserRepository.prototype.all = function () {
-        return this._dbContext.findAll();
+        return this._dbContext.get().findAll();
     };
     UserRepository.prototype.where = function (predicate) {
-        return this._dbContext.find(predicate);
+        return this._dbContext.get().find(predicate);
+    };
+    UserRepository.prototype.singleOrDefault = function (predicate) {
+        return this._dbContext.get().find(predicate)[0];
     };
     UserRepository.prototype.add = function (user) {
-        var userModel = this._dbContext.create(user);
-        return userModel;
+        var newUser = this._dbContext.get().create(user);
+        return newUser;
     };
-    UserRepository.prototype.remove = function (id) {
-        this._dbContext.delete(id);
+    UserRepository.prototype.remove = function (user) {
+        this._dbContext.get().delete(user);
         return true;
     };
     return UserRepository;

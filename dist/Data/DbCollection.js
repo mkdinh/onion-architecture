@@ -1,21 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var DbCollection = /** @class */ (function () {
-    function DbCollection(data) {
-        this._data = data;
+    function DbCollection(domainTypeName, entities) {
+        this._entities = entities;
+        this.domainTypeName = domainTypeName;
     }
     DbCollection.prototype.findAll = function () {
-        return this._data;
+        return this._entities;
     };
     DbCollection.prototype.find = function (predicate) {
-        return this._data.filter(predicate);
+        return this.findAll().filter(predicate);
     };
-    DbCollection.prototype.create = function (data) {
-        this._data.push(data);
-        return data;
+    DbCollection.prototype.create = function (entity) {
+        this._entities.push(entity);
+        return entity;
     };
-    DbCollection.prototype.delete = function (id) {
-        this._data = this._data.filter(function (x) { return x.id !== id; });
+    DbCollection.prototype.delete = function (entity) {
+        this._entities = this.findAll().filter(function (x) { return x === entity; });
         return true;
     };
     return DbCollection;

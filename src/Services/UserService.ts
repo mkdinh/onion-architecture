@@ -1,7 +1,7 @@
-import { IUserService } from '../App/IUserService';
-import { User } from '../App/User';
-import { ILogger } from '../Utils/ILogger';
-import { UserRepository } from '../Repositories/UserRepository';
+import { IUserService } from "../App/IUserService";
+import { User } from "../App/models/User";
+import { ILogger } from "../Utils/ILogger";
+import { UserRepository } from "../Repositories/UserRepository";
 
 export class UserService implements IUserService {
   private _userRepo: UserRepository;
@@ -17,7 +17,7 @@ export class UserService implements IUserService {
   }
 
   public getUserById(id: number): User {
-    return this._userRepo.where((u: User) => u.id === id);
+    return this._userRepo.singleOrDefault((u: User) => u.id === id);
   }
 
   public addUser(user: User) {

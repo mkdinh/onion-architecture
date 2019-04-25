@@ -1,26 +1,30 @@
-import { IDbCollection } from './IDbCollection';
+import { IDbCollection } from "./IDbCollection";
 
-export class DbCollection<T extends { id: number }>
-  implements IDbCollection<T> {
-  private _data: T[];
+export class DbCollection<T> implements IDbCollection<T> {
+  private _entities: T[];
 
-  constructor(data: T[]) {
-    this._data = data;
+  public domainTypeName: string;
+
+  constructor(domainTypeName: string, entities: T[]) {
+    this._entities = entities;
+    this.domainTypeName = domainTypeName;
   }
 
   findAll(): T[] {
-    return this._data;
-  }
-  find(predicate: (x: T) => boolean): T[] {
-    return this._data.filter(predicate);
-  }
-  create(data: T): T {
-    this._data.push(data);
-    return data;
+    return this._entities;
   }
 
-  delete(id: number): boolean {
-    this._data = this._data.filter((x: T) => x.id !== id);
+  find(predicate: (x: T) => boolean): T[] {
+    return this.findAll().filter(predicate);
+  }
+
+  create(entity: T): T {
+    this._entities.push(entity);
+    return entity;
+  }
+
+  delete(entity: T): boolean {
+    this._entities = this.findAll().filter((x: T) => x === entity);
     return true;
   }
 }
