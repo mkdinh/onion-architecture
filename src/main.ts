@@ -12,8 +12,8 @@ import bookData from "./assets/books.json";
 const logger = new Logger();
 const dbContext = new DbContext();
 
-dbContext.add<User>(User, userData);
-dbContext.add<Book>(Book, bookData);
+dbContext.add<User>((User as any).name, userData);
+dbContext.add<Book>((Book as any).name, bookData);
 
 const userRepo = new UserRepository(dbContext);
 const userService = new UserService(userRepo, logger);

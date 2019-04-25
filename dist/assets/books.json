@@ -2,17 +2,17 @@
         "id": 1,
         "title": "Book 1",
         "quantity": 1,
-        "status": "ancient"
+        "condition": "ancient"
     },
     {
         "id": 2,
-        "name": "Book 2",
+        "title": "Book 2",
         "quantity": 3,
-        "status": "old"
+        "condition": "old"
     },
     {
         "id": 3,
-        "name": "Book 3",
+        "title": "Book 3",
         "quantity": 5,
         "condition": "new"
     }

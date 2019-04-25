@@ -1,6 +1,6 @@
 import { IDbCollection } from "./IDbCollection";
 
 export interface IDbContext {
-  add<T>(domainType: (new () => T) & { name: string }, collection: T[]): void;
-  get<T>(): IDbCollection<T>;
+  add<T>(key: string, collection: T[]): void;
+  get<T>(key: string): IDbCollection<T>;
 }

@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var DbCollection = /** @class */ (function () {
-    function DbCollection(domainTypeName, entities) {
+    function DbCollection(key, entities) {
+        this.key = key;
         this._entities = entities;
-        this.domainTypeName = domainTypeName;
     }
     DbCollection.prototype.findAll = function () {
         return this._entities;

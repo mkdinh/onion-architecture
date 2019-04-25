@@ -1,5 +1,5 @@
 export interface IDbCollection<T> {
-  domainTypeName: string;
+  key: string;
   findAll(): T[];
   find(predicate: (entity: T) => boolean): T[];
   create(entity: T): T;

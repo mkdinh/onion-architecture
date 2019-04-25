@@ -2,12 +2,11 @@ import { IDbCollection } from "./IDbCollection";
 
 export class DbCollection<T> implements IDbCollection<T> {
   private _entities: T[];
+  public key: string;
 
-  public domainTypeName: string;
-
-  constructor(domainTypeName: string, entities: T[]) {
+  constructor(key: string, entities: T[]) {
+    this.key = key;
     this._entities = entities;
-    this.domainTypeName = domainTypeName;
   }
 
   findAll(): T[] {
